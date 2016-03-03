@@ -8,20 +8,25 @@ app = Flask(__name__)
 @app.route("/")
 def root():
     base = "tellement.sexy"
-
-    prefixes = ["est", "sont", "is", "are"]
+    verbs = {
+        "est": "est",
+        "sont": "sont",
+        "is": "is",
+        "are": "are",
+        "cest": "c'est",
+    }
 
     host = urlparse(request.base_url).netloc.split(":", 1)[0]
 
-    for prefix in prefixes:
-        idx = host.rfind(".%s.%s" % (prefix, base))
+    for verb, text in verbs.items():
+        idx = host.rfind(".%s.%s" % (verb, base))
         if idx < 0:
             continue
 
         parts = host[:idx].split(".")
 
         name = " ".join([p.capitalize() for p in parts])
-        return "%s %s tellement sexy :)" % (name, prefix)
+        return "%s %s tellement sexy ;)" % (name, text)
 
     abort(404)
 
