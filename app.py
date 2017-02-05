@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from urlparse import urlparse
+from urllib.parse import urlparse
 from flask import Flask, request, abort
 
 app = Flask(__name__)
